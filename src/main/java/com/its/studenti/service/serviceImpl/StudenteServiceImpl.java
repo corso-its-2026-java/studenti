@@ -29,4 +29,43 @@ public class StudenteServiceImpl implements StudenteService {
     public List<Studente> getAll() {
         return studenti;
     }
+
+    @Override
+    public String create(Studente studente) {
+
+        studenti.add(studente);
+
+        return "Studente creato con successo";
+    }
+
+    @Override
+    public String createAvanzata(Studente studente) {
+
+        String msg = "";
+        boolean studenteTrovato = false;
+        if(studente!=null){
+
+            for(Studente studenteLista : studenti){
+                if (studente.getId() == studenteLista.getId()) {
+                    msg = "Impossibile registrare 2 studenti con lo stesso id";
+                    studenteTrovato = true;
+                    break;
+                }
+            }
+
+            if(!studenteTrovato){
+                if(studente.getNome()!=null && studente.getCorso()!=null && studente.getId()>0){
+                    studenti.add(studente);
+                    msg = "Studente registrato com sucesso!";
+                } else{
+                    msg = "Impossibile registrare studente: valorizzare tutti i campi e inserire un id > 0!";
+                }
+            }
+
+        } else {
+            msg = "Impossibile registrare studente non valorizzato";
+        }
+
+        return  msg;
+    }
 }

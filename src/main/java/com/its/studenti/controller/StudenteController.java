@@ -3,11 +3,8 @@ package com.its.studenti.controller;
 import com.its.studenti.entity.Studente;
 import com.its.studenti.service.StudenteService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -20,6 +17,16 @@ public class StudenteController {
     @GetMapping("/elenco")
     public List<Studente> getAll() {
         return studenteService.getAll();
+    }
+
+    @PostMapping("/salva-studente")
+    public String create(@RequestBody Studente studente) {
+        return studenteService.create(studente);
+    }
+
+    @PostMapping("/salva-studente-avanzato")
+    public String createAvanzata(@RequestBody Studente studente) {
+        return studenteService.createAvanzata(studente);
     }
 
 }

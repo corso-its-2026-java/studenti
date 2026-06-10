@@ -7,4 +7,8 @@ import java.util.List;
 public interface StudenteService {
 
     List<Studente> getAll();
+
+    String create(Studente studente);
+
+    String createAvanzata(Studente studente);
 }
