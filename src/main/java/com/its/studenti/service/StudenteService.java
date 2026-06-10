@@ -6,9 +6,13 @@ import java.util.List;
 
 public interface StudenteService {
 
-    List<Studente> getAll();
+    String getAll();
 
     String create(Studente studente);
 
     String createAvanzata(Studente studente);
+
+    Studente getbyId(int id);
+
+    String deleteById(int id);
 }

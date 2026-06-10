@@ -15,7 +15,7 @@ public class StudenteController {
     private StudenteService studenteService;
 
     @GetMapping("/elenco")
-    public List<Studente> getAll() {
+    public String getAll() {
         return studenteService.getAll();
     }
 
@@ -27,6 +27,16 @@ public class StudenteController {
     @PostMapping("/salva-studente-avanzato")
     public String createAvanzata(@RequestBody Studente studente) {
         return studenteService.createAvanzata(studente);
+    }
+
+    @GetMapping("/{id}")
+    public Studente getById(@PathVariable("id") int id) {
+        return studenteService.getbyId(id);
+    }
+
+    @GetMapping("/delete/{id}")
+    public String deleteById(@PathVariable("id") int id) {
+        return studenteService.deleteById(id);
     }
 
 }

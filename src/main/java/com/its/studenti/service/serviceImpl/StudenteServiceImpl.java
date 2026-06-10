@@ -26,8 +26,12 @@ public class StudenteServiceImpl implements StudenteService {
     }
 
     @Override
-    public List<Studente> getAll() {
-        return studenti;
+    public String getAll() {
+        if(studenti.isEmpty()){
+            return "Nessuna studente";
+        } else {
+            return "La lista contiene: " + studenti.size() + " studenti: " + studenti;
+        }
     }
 
     @Override
@@ -67,5 +71,29 @@ public class StudenteServiceImpl implements StudenteService {
         }
 
         return  msg;
+    }
+
+    @Override
+    public Studente getbyId(int id) {
+       return studenti.stream().filter(s -> s.getId() == id).findFirst().orElse(null);
+    }
+
+    @Override
+    public String deleteById(int id) {
+
+        boolean studenteTrovato = false;
+        for(Studente studenteLista : studenti){
+            if (studenteLista.getId() == id) {
+                studenteTrovato = true;
+                break;
+            }
+        }
+
+        if(!studenteTrovato){
+            return "Impossibile eliminare studente";
+        }
+
+        studenti.remove(getbyId(id));
+        return "studente eliminato con successo";
     }
 }
